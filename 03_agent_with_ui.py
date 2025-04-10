@@ -1,20 +1,9 @@
 import chainlit as cl
 import semantic_kernel as sk
-from semantic_kernel.connectors.ai import FunctionChoiceBehavior
-from semantic_kernel.connectors.ai.open_ai import (
-    OpenAIChatCompletion,
-    OpenAIChatPromptExecutionSettings,
-)
+from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
 from semantic_kernel.functions import kernel_function
-from semantic_kernel.contents import ChatHistory
 
 from semantic_kernel.agents import ChatCompletionAgent, ChatHistoryAgentThread
-from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
-
-request_settings = OpenAIChatPromptExecutionSettings(
-    function_choice_behavior=FunctionChoiceBehavior.Auto(filters={"excluded_plugins": ["ChatBot"]})
-)
-
 # Example Native Plugin (Tool)
 class WeatherPlugin:
     @kernel_function(name="get_weather", description="Gets the weather for a city")
@@ -34,7 +23,7 @@ async def on_chat_start():
 
     # Add your AI service (e.g., OpenAI)
     # Make sure OPENAI_API_KEY and OPENAI_ORG_ID are set in your environment
-    ai_service = OpenAIChatCompletion(service_id="default", ai_model_id="gpt-4o")
+    ai_service = AzureChatCompletion()
     kernel.add_service(ai_service)
 
     # Import the WeatherPlugin
