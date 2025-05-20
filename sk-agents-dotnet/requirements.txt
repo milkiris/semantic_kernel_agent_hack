@@ -1,0 +1,5 @@
+Packages
+- Azure.Identity
+- Microsoft.SemanticKernel.Agents.Core
+- Microsoft.SemanticKernel.Agents.AzureAI
+- Microsoft.SemanticKernel.Connectors.AzureOpenAI
