@@ -41,18 +41,18 @@ async def on_chat_start():
         instructions="You are a helpful assistant",
     )
 
-    thread: ChatHistoryAgentThread = None
+    thread: ChatHistoryAgentThread = None # type: ignore
     cl.user_session.set("agent", agent)
     cl.user_session.set("thread", thread)
 
 @cl.on_message
 async def on_message(message: cl.Message):
-    agent = cl.user_session.get("agent") # type: Agent
-    thread = cl.user_session.get("thread") # type: ChatHistoryAgentThread 
+    agent = cl.user_session.get("agent") # type: ignore # type: Agent
+    thread = cl.user_session.get("thread") # type: ignore # type: ChatHistoryAgentThread 
 
     answer = cl.Message(content="")
 
-    async for response in agent.invoke_stream(messages=message.content, thread=thread):
+    async for response in agent.invoke_stream(messages=message.content, thread=thread): # type: ignore
 
         if response.content:
             await answer.stream_token(str(response.content))

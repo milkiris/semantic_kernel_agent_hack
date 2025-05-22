@@ -3,7 +3,7 @@ import asyncio
 
 from semantic_kernel import Kernel
 from semantic_kernel.agents import ChatCompletionAgent, ChatHistoryAgentThread
-from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
+from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion, OpenAIChatCompletion
 from semantic_kernel.filters import FunctionInvocationContext
 
 """
@@ -30,10 +30,10 @@ async def function_invocation_filter(context: FunctionInvocationContext, next):
 kernel = Kernel()
 
 # The filter is used for demonstration purposes to show the function invocation.
-kernel.add_filter("function_invocation", function_invocation_filter)
+kernel.add_filter("function_invocation", function_invocation_filter) # type: ignore
 
 billing_agent = ChatCompletionAgent(
-    service=AzureChatCompletion(),
+    service=OpenAIChatCompletion(),
     name="BillingAgent",
     instructions=(
         "You specialize in handling customer questions related to billing issues. "
@@ -45,7 +45,7 @@ billing_agent = ChatCompletionAgent(
 )
 
 refund_agent = ChatCompletionAgent(
-    service=AzureChatCompletion(),
+    service=OpenAIChatCompletion(),
     name="RefundAgent",
     instructions=(
         "You specialize in addressing customer inquiries regarding refunds. "
@@ -57,7 +57,7 @@ refund_agent = ChatCompletionAgent(
 )
 
 triage_agent = ChatCompletionAgent(
-    service=AzureChatCompletion(),
+    service=OpenAIChatCompletion(),
     kernel=kernel,
     name="TriageAgent",
     instructions=(
@@ -70,7 +70,7 @@ triage_agent = ChatCompletionAgent(
     plugins=[billing_agent, refund_agent],
 )
 
-thread: ChatHistoryAgentThread = None
+thread: ChatHistoryAgentThread = None # type: ignore
 
 
 async def chat() -> bool:

@@ -5,6 +5,8 @@ import asyncio
 from semantic_kernel.agents import ChatCompletionAgent, ChatHistoryAgentThread
 from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
 from semantic_kernel.connectors.mcp import MCPStdioPlugin
+from semantic_kernel.connectors.ai.open_ai import OpenAIChatCompletion
+
 
 """
 The following sample demonstrates how to create a chat completion agent that
@@ -31,7 +33,7 @@ async def main():
         args=["-y", "@modelcontextprotocol/server-github"],
     ) as github_plugin:
         agent = ChatCompletionAgent(
-            service=AzureChatCompletion(),
+            service=OpenAIChatCompletion(),
             name="IssueAgent",
             instructions="Answer questions about the Microsoft semantic-kernel github project.",
             plugins=[github_plugin],
