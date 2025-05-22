@@ -1,11 +1,13 @@
 import asyncio
 from semantic_kernel.agents import ChatCompletionAgent
 from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
+from semantic_kernel.connectors.ai.open_ai import OpenAIChatCompletion
+
 
 async def main():
     # Initialize a chat agent with basic instructions
     agent = ChatCompletionAgent(
-        service=AzureChatCompletion(),
+        service=OpenAIChatCompletion(),
         name="SK-Assistant",
         instructions="You are a helpful assistant.",
     )

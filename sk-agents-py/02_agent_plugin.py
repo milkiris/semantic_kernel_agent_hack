@@ -4,6 +4,8 @@ from pydantic import BaseModel
 from semantic_kernel.agents import ChatCompletionAgent
 from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion, OpenAIChatPromptExecutionSettings
 from semantic_kernel.functions import kernel_function, KernelArguments
+from semantic_kernel.connectors.ai.open_ai import OpenAIChatCompletion
+
 
 class MenuPlugin:
     @kernel_function(description="Provides a list of specials from the menu.")
@@ -31,7 +33,7 @@ async def main():
 
     # Create agent with plugin and settings
     agent = ChatCompletionAgent(
-        service=AzureChatCompletion(),
+        service=OpenAIChatCompletion(),
         name="SK-Assistant",
         instructions="You are a helpful assistant.",
         plugins=[MenuPlugin()],
