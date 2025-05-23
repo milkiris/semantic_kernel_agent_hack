@@ -5,7 +5,7 @@ import asyncio
 from semantic_kernel import Kernel
 from semantic_kernel.agents import AgentGroupChat, ChatCompletionAgent
 from semantic_kernel.agents.strategies import TerminationStrategy
-from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
+from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion, OpenAIChatCompletion
 
 """
 The following sample demonstrates how to create a simple, agent group chat that
@@ -16,7 +16,7 @@ Completion Agent to complete a task.
 
 def _create_kernel_with_chat_completion(service_id: str) -> Kernel:
     kernel = Kernel()
-    kernel.add_service(AzureChatCompletion(service_id=service_id))
+    kernel.add_service(OpenAIChatCompletion(service_id=service_id))
     return kernel
 
 
